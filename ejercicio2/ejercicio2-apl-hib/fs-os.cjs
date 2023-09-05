@@ -1,5 +1,6 @@
 const fs = require("fs");
 const os = require("os");
+const path = require('path');
 
 //Creo Carpeta y Archivo
 
@@ -11,13 +12,14 @@ fs.mkdir('archivos', (error) =>{
     }
 })
 
-fs.writeFileSync("./archivos/notas.txt", "¡Hola Mundo!");
+let ruta = path.join("./archivos", "notas.txt");
 
+fs.writeFileSync(ruta, "¡Hola Mundo!");
 
 // Leo el archivo
-fs.readFile("./archivos/notas.txt", "utf-8", (error, data) => {
+fs.readFile(ruta, "utf-8", (error, data) => {
     if(error){
-        console.log(error);
+        console.log("error");
     }else {
         console.log(data);
     }
@@ -26,10 +28,12 @@ fs.readFile("./archivos/notas.txt", "utf-8", (error, data) => {
 const platform = os.platform();
 const arquitec = os.arch();
 
-//Creo Archivo info.txt
-fs.writeFileSync("./archivos/info.txt", platform);
+let ruta2 = path.join("./archivos", "info.txt");
 
-fs.writeFile("./archivos/info.txt", arquitec, {flag: "a"}, (error, data) => {
+//Creo Archivo info.txt
+fs.writeFileSync(ruta2, platform);
+
+fs.writeFile(ruta2, arquitec, {flag: "a"}, (error, data) => {
     if(error){
         console.log(error);
     }else{
@@ -37,7 +41,7 @@ fs.writeFile("./archivos/info.txt", arquitec, {flag: "a"}, (error, data) => {
     }
 });
 
-fs.writeFile("./archivos/info.txt", "\nGonzalo - Valar Morghulis", {flag: "a"}, (error, data) => {
+fs.writeFile(ruta2, "\nGonzalo - Valar Morghulis", {flag: "a"}, (error, data) => {
     if(error){
         console.log(error);
     }else{
